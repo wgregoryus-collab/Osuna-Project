@@ -1,0 +1,8 @@
+#include "flat/core.pwn"
+#include "flat/func.pwn"
+#include "flat/furniture.pwn"
+#include "flat/structure.pwn"
+#include "flat/storage.pwn"
+#include "flat/cmd.pwn"
+#include "flat/callback.pwn"
+#include "flat/mapping.pwn"

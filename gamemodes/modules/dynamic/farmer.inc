@@ -1,0 +1,5 @@
+#include "modules/dynamic/farmer/Header"
+#include "modules/dynamic/farmer/SAMPCallback"
+#include "modules/dynamic/farmer/Timer"
+#include "modules/dynamic/farmer/Function"
+#include "modules/dynamic/farmer/Commands"

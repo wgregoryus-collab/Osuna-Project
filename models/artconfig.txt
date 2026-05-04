@@ -1,0 +1,1 @@
+AddCharModel(287, 200001, "SEB.dff", "SEB.txd");

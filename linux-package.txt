@@ -1,0 +1,10 @@
+# first install g++
+sudo dpkg --add-architecture i386
+sudo apt update
+sudo apt-get install g++-multilib
+
+# install sampctl
+curl https://raw.githubusercontent.com/Southclaws/sampctl/master/install-deb.sh | sh
+
+# install mysql
+sudo apt install mysql-server
