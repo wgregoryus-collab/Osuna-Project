@@ -1,3 +1,5 @@
+forward attachwep(playerid, params[]);
+
 CMD:weapons(playerid, params[]) 
 {
 	ShowPlayerWeapon(playerid, playerid);
@@ -15,7 +17,7 @@ CMD:weapon(playerid, params[])
 	new category[32], string[32];
 
 	if(sscanf(params, "s[32]S()[32]", category, string))
-		return SendSyntaxMessage(playerid, "/weapon [give/view/acceptview/scrap/destroy] | /attachwep [pos/bone/hide]");
+		return SendSyntaxMessage(playerid, "/weapon [give/view/acceptview/scrap/destroy/pos] | /attachwep [pos/bone/hide]");
 
 	if(!strcmp(category, "give"))
 	{
@@ -89,6 +91,10 @@ CMD:weapon(playerid, params[])
 			ResetWeaponID(playerid, weaponid);
 		}
 	}
+	else if(!strcmp(category, "pos"))
+	{
+		return attachwep(playerid, "pos");
+	}
 	else if(!strcmp(category, "view"))
 	{
 		new userid;
@@ -102,11 +108,11 @@ CMD:weapon(playerid, params[])
 		ShowPlayerWeapon(playerid, userid);		
 		SendServerMessage(playerid, "Kamu memperlihatkan senjatamu kepada %s.", ReturnName(userid, 0, 1));
 	}
-	else SendSyntaxMessage(playerid, "/weapon [give/view/acceptview/scrap/destroy]");
+	else SendSyntaxMessage(playerid, "/weapon [give/view/acceptview/scrap/destroy/pos]");
 	return 1;
 }
 
-CMD:creategun(playerid, params[]) 
+CMD:creategun(playerid, params[])
 {
 	if(!IsPlayerInRangeOfPoint(playerid, 3.0, 331.41, 1123.09, 1084.66)) 
         return SendErrorMessage(playerid, "Kamu tidak berada di blackmarket.");

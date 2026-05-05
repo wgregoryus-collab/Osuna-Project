@@ -96,7 +96,9 @@ task onlineplayer[1000]()
  {
     new ownstatus[256];
     format(ownstatus,sizeof(ownstatus),"Osuna Roleplay  | %d Players",playergame);
-    DCC_SetBotActivity(ownstatus);
+    // Disabled because Discord Connector calls from a timer can crash if the plugin
+    // is not fully initialized or connected when this task runs.
+    //DCC_SetBotActivity(ownstatus);
 }
 
 public OnGameModeInit()
