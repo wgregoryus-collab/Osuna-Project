@@ -38935,6 +38935,21 @@ CMD:setname(playerid, params[])
     return 1;
 }
 
+forward OnFactionRankUpdated(playerid, userid);
+public OnFactionRankUpdated(playerid, userid)
+{
+    if(cache_affected_rows() > 0)
+    {
+        printf("[SETFRANK] Successfully updated faction for %s (ID: %d)", ReturnName(userid), GetPlayerSQLID(userid));
+    }
+    else
+    {
+        printf("[SETFRANK] Failed to update faction for %s (ID: %d)", ReturnName(userid), GetPlayerSQLID(userid));
+        SendErrorMessage(playerid, "Failed to save faction data to database. Please try again.");
+    }
+    return 1;
+}
+
 CMD:setfrank(playerid, params[])
 {
     if (CheckAdmin(playerid, 9))
@@ -38966,7 +38981,8 @@ CMD:setfrank(playerid, params[])
 
     new query[128];
     format(query, sizeof(query), "UPDATE `characters` SET `Faction`='%d', `FactionRank`='%d', `FactionRankName`='%s' WHERE `ID`='%d'", PlayerData[userid][pFactionID], rank, SQL_ReturnEscaped(PlayerData[userid][pFactionRankName]), GetPlayerSQLID(userid));
-    mysql_tquery(g_iHandle, query);
+    printf("[SETFRANK] Executing query: %s", query);
+    mysql_tquery(g_iHandle, query, "OnFactionRankUpdated", "dd", playerid, userid);
 
     SendAdminAction(playerid, "You have set %s's faction to %s and rank to %s.", ReturnName(userid, 0), FactionData[factionid][factionName], PlayerData[userid][pFactionRankName]);
     SendAdminAction(userid, "%s has set your faction to %s and rank to %s.", ReturnAdminName(playerid), FactionData[factionid][factionName], PlayerData[userid][pFactionRankName]);
